@@ -7,6 +7,8 @@ to launch http server :
 
 from https://github.com/mbostock/d3/wiki
 
+exemple url : https://github.com/mbostock/d3/wiki/Gallery
+
 For example, you can run Python's built-in server:
 Python 3+:
 
