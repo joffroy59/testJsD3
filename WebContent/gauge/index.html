@@ -21,16 +21,28 @@
                 
             var gauges = [];
             
-            function createGauge(name, label, min, max)
+            function createGauge(name, label, min, max, size,autoTick)
             {
+            	var minorTicks;
+            	var majorTicks;
+                var size =  undefined != size ? size : 100;
+                var max = undefined != max ? max : 100;
+                var min = undefined != min ? min : 0;
+            	if (undefined != autoTick && autoTick){
+            		minorTicks = 5;
+            		majorTicks = 1 + (max/5);
+            	}
                 var config = 
                 {
-                    size: 120,
+                    size: undefined != size ? size : 100,
                     label: label,
-                    min: undefined != min ? min : 0,
-                    max: undefined != max ? max : 100,
-                    minorTicks: 5
+                    min: min,
+                    max: max,
+                    minorTicks : undefined != minorTicks ? minorTicks : 5,
+                    majorTicks : majorTicks
                 }
+                
+                //var 
                 
                 var range = config.max - config.min;
                 config.yellowZones = [{ from: config.min + range*0.75, to: config.min + range*0.9 }];
@@ -39,13 +51,16 @@
                 gauges[name] = new Gauge(name + "GaugeContainer", config);
                 gauges[name].render();
             }
-            
+
             function createGauges()
             {
                 createGauge("memory", "Memory");
                 createGauge("cpu", "CPU");
                 createGauge("network", "Network");
                 //createGauge("test", "Test", -50, 50 );
+                createGauge("myTest10", "myTest", 0, 10,100,true);
+                createGauge("myTest20", "myTest2", 0, 20,100,true);
+                createGauge("myTest100", "myTest100", 0, 100,200,true);
             }
             
             function updateGauges()
@@ -79,6 +94,15 @@
         <span id="cpuGaugeContainer"></span>
         <span id="networkGaugeContainer"></span>
         <span id="testGaugeContainer"></span>
+
+        <br><br>
+
+        <h2>my Test Gauge</h2>
+	    <div>
+            <span id="myTest10GaugeContainer"></span>
+            <span id="myTest20GaugeContainer"></span>
+            <span id="myTest100GaugeContainer"></span>
+	    </div>
     </body>
     
 </html>
